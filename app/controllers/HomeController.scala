@@ -13,6 +13,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok("4th attempt !!")
   }
 
+  // not in use right now (not working)
   def send()= Action {implicit request =>
 
     val props = System.getProperties
@@ -20,8 +21,9 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     props.put("mail.transport.protocol", "smtp")
     props.put("mail.smtp.port", "465")
     props.put("mail.smtp.auth", "true")
-    props.put("mail.smtp.starttls.enable", true)
-    props.put("mail.smtp.starttls.required", true)
+    //props.put("email.smtp.ssl",true)
+    //props.put("mail.smtp.starttls.enable", true)
+    //props.put("mail.smtp.starttls.required", true)
 
     val session = Session.getDefaultInstance(props)
 
@@ -36,7 +38,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     val transport = session.getTransport
     println("sending mail begins ")
 
-    transport.connect("smtp.gmail.com", 465, "arun952138@gmail.com", "Arun1234")
+    transport.connect("smtp.gmail.com", 465, "arun952138@gmail.com", "Arun1234@")
     transport.sendMessage(msg, msg.getAllRecipients)
 
     Ok("mail sent !!")
